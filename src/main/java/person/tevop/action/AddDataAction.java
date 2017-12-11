@@ -1,8 +1,8 @@
 package person.tevop.action;
 
+import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
 
 import com.opensymphony.xwork2.ActionSupport;
 
@@ -15,6 +15,7 @@ public class AddDataAction extends ActionSupport {
 	private float cost;
 	private String comment;
 	private UserService userService;
+	private List<User> users = new ArrayList<User>();
 	private static final long serialVersionUID = 1L;
 
 	@Override
@@ -45,6 +46,8 @@ public class AddDataAction extends ActionSupport {
 		user.getContents().add(content);
 //		user.setContents(contents);
 		userService.save(user);
+		List<User> all = (List<User>)userService.getHibernateTemplate().find("from User");
+		setUsers(all);
 		return "success";
 	}
 
@@ -87,5 +90,15 @@ public class AddDataAction extends ActionSupport {
 	public void setUserService(UserService userService) {
 		this.userService = userService;
 	}
+
+	public List<User> getUsers() {
+		return users;
+	}
+
+	public void setUsers(List<User> users) {
+		this.users = users;
+	}
+	
+	
 
 }
