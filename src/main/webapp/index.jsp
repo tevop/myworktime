@@ -1,18 +1,23 @@
-<%@ page language="java" contentType="text/html; charset=GB18030"
-    pageEncoding="GB18030"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib uri="/struts-tags" prefix="s"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=GB18030">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 </head>
 <body>
-	<form method="post" action="login">
-		ÓÃ  »§  Ãû£º<input type="text" name="name"><br>
-		ÃÜ        Âë£º<input type="text" name="pass"><br>
-		<input type="submit" value="Ìá½»">
-	</form>
-		<button onclick="window.location='register.jsp'">×¢²á</button>
-		<%=request.getContextPath()%>
+	<font color="red">
+	<s:fielderror>
+		<s:param>errorMessage</s:param>
+	</s:fielderror>
+	</font>
+	<s:form method="post" action="login">
+		<s:textfield  name="name" label="ç”¨  æˆ·  åï¼š" />
+		<s:password name="pass" label="å¯†        ç ï¼š" />
+		<s:submit value="æäº¤" />
+	</s:form>
+		<button onclick="window.location='register.jsp'">æ³¨å†Œ</button>
 </body>
 </html>

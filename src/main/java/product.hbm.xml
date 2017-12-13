@@ -7,7 +7,7 @@
 		<id name="id">
 			<generator class="native" />
 		</id>
-		<set name="contents" cascade="all" lazy="false">
+		<set name="contents" lazy="false" inverse="true">
             <key>
                 <column name="user_id" />
             </key>
@@ -24,6 +24,8 @@
 		<property name="date" type="java.util.Date"/>
 		<property name="cost" type="float" />
 		<property name="comment" />
+		<many-to-one name="user" class="User" cascade="all" not-null="true"
+			column="user_id"/>
 
 	</class>
 	<!-- <class name="Log" table="t_log"> <id name="id"> <generator class="assigned"/> 

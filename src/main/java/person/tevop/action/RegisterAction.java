@@ -20,9 +20,9 @@ public class RegisterAction extends ActionSupport{
 
 	@Override
 	public String execute() throws Exception {
-		if (!pass.equals(repass)) {
-			return "passNotSame";
-		}
+//		if (!pass.equals(repass)) {
+//			return "passNotSame";
+//		}
 		User user = new User();
 		user.setName(name);
 		user.setPass(pass);
@@ -66,6 +66,16 @@ public class RegisterAction extends ActionSupport{
 	public void setUserSrevice(UserService userSrevice) {
 		this.userSrevice = userSrevice;
 	}
+
+	@Override
+	public void validate() {
+		if (!pass.equals(repass)) {
+			addFieldError("errorMessage", "√‹¬Î±ÿ–Îœ‡Õ¨");
+			return; 
+		}
+	}
+	
+	
 	
 	
 	

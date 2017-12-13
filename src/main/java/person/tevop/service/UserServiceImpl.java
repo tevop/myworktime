@@ -21,8 +21,8 @@ public class UserServiceImpl implements UserService{
 	}
 
 	@Override
-	public boolean save(User user) throws Exception{
-		return userDao.save(user);
+	public boolean save(Object obj) throws Exception{
+		return userDao.save(obj);
 	}
 
 	@Override

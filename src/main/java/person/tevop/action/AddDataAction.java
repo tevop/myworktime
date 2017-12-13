@@ -11,42 +11,34 @@ import person.tevop.model.User;
 import person.tevop.service.UserService;
 
 public class AddDataAction extends ActionSupport {
+	private String userName;
 	private Date date;
 	private float cost;
 	private String comment;
 	private UserService userService;
+	
 	private List<User> users = new ArrayList<User>();
 	private static final long serialVersionUID = 1L;
 
 	@Override
 	public String execute() throws Exception {
-		System.out.println("adding");
-		User user = userService.getUser("user297");
+		System.out.println("adding¡£¡£¡£comment is: " + comment);
+		System.out.println("userName is: " + userName);
+		User user = userService.getUser(userName);
 		System.out.println("user is:" + user);
-//		Set<Content> contents = null;
 		if (user == null) {
-			user = new User();
-			user.setName("user299");
-			user.setPass("123");
-		} 
-//		else {
-//			user = (User)userService.getHibernateTemplate().load(User.class, user.getId()); 
-//			contents = user.getContents();
-////			user.setContents(null);
-//			userService.getHibernateTemplate().delete(user);
-//		}
-//		user.setContents(contents);
-		// userService.save(user);
-
-		// Set<Content> contents = user.getContents();
+			return "fail";
+		}
+		System.out.println("user's name is: " +user.getName());
 		Content content = new Content();
 		content.setComment(comment);
 		content.setCost(cost);
+		content.setUser(user); 
 		content.setDate(new Date());
 		user.getContents().add(content);
 //		user.setContents(contents);
-		userService.save(user);
-		List<User> all = (List<User>)userService.getHibernateTemplate().find("from User");
+		userService.save(content);
+		List<User> all = (List<User>)userService.getHibernateTemplate().find("from User u where u.name=?", user.getName());
 		setUsers(all);
 		return "success";
 	}
@@ -98,7 +90,13 @@ public class AddDataAction extends ActionSupport {
 	public void setUsers(List<User> users) {
 		this.users = users;
 	}
-	
-	
+
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
 
 }

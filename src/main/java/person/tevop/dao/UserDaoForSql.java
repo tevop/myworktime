@@ -21,12 +21,12 @@ public class UserDaoForSql implements UserDao{
 		this.hibernateTemplate = hibernateTemplate;
 	}
 	
-	public boolean save(User user) throws Exception{
+	public boolean save(Object obj) throws Exception{
 //		if (exists(user)) {
 //			return false;
 //		}
 		System.out.println("saving user...");
-		hibernateTemplate.saveOrUpdate(user);
+		hibernateTemplate.saveOrUpdate(obj);
 		return true;
 	}
 

@@ -1,5 +1,8 @@
 package person.tevop;
 
+import java.io.UnsupportedEncodingException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.Date;
 import java.util.HashSet;
 
@@ -52,6 +55,20 @@ public class DBTest {
 		session.save(user);
 		tx.commit();
 		session.close();
+	}
+	
+	@Test
+	public void testMD5() {
+		MessageDigest digest = null;
+		try {
+			digest = MessageDigest.getInstance("MD5");
+			byte[] input = new String("www").getBytes("UTF-8");
+			byte[] output = digest.digest(input);
+			System.out.println(new String(output,"UTF-8"));
+		} catch (NoSuchAlgorithmException | UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 }

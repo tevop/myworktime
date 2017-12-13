@@ -1,17 +1,30 @@
-<%@ page language="java" contentType="text/html; charset=GB18030"
-    pageEncoding="GB18030"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib uri="/struts-tags" prefix="s"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=GB18030">
-<title>登录成功</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>鐧诲綍鎴愬姛</title>
 </head>
 <body>
- <h1>登录成功</h1>
+ <h1>鐧诲綍鎴愬姛</h1>
+ 	<table width="242" height="256" border="1" cellpadding="1"
+		cellspacing="1">
+			<s:iterator value="contents" var="content" status="c">
+				<tr>
+					<td><s:property value="#content.cost" /></td>
+					<td><s:property value="#content.ser.name" /></td>
+					<td><s:property value="#content.comment" /></td>
+					<td><s:property value="#content.date" /></td>
+				</tr>
+			</s:iterator>
+	</table>
  <form method="post" action="add">
-		时	间（小时）：<input type="text" name="cost"><br>
-		内		     容：<input type="text" name="comment"><br>
-		<input type="submit" value="提交">
+ <input type="hidden" value="<s:property value='name'/>" name="userName" /><br>
+		鏃�	闂达紙灏忔椂锛夛細<input type="text" name="cost"><br>
+		鍐�		     瀹癸細<input type="text" name="comment"><br>
+		<input type="submit" value="鎻愪氦">
 	</form>
 </body>
 </html>

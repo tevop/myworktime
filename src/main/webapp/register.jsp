@@ -1,17 +1,23 @@
-<%@ page language="java" contentType="text/html; charset=GB18030"
-    pageEncoding="GB18030"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib uri="/struts-tags" prefix="s"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=GB18030">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 </head>
 <body>
-	<form method="post" action="<%=request.getContextPath()%>/register.action">
-		ÓÃ  »§  Ãû£º<input type="text" name="name"><br>
-		ÃÜ        Âë£º<input type="text" name="pass"><br>
-		È·ÈÏÃÜÂë£º<input type="text" name="repass"><br>
-		<input type="submit" value="Ìá½»">
+	<font color="red">
+	<s:fielderror>
+		<s:param>errorMessage</s:param>
+	</s:fielderror>
+	</font>
+	<form method="post" action="register">
+		ç”¨  æˆ·  åï¼š<input type="text" name="name"><br>
+		å¯†        ç ï¼š<input type="text" name="pass"><br>
+		ç¡®è®¤å¯†ç ï¼š<input type="text" name="repass"><br>
+		<input type="submit" value="æäº¤">
 	</form>
 </body>
 </html>
