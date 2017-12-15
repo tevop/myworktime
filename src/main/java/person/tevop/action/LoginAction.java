@@ -13,12 +13,12 @@ import person.tevop.model.Content;
 import person.tevop.model.User;
 import person.tevop.service.UserService;
 
-public class LoginAction extends ActionSupport{
+public class LoginAction extends MyAction{
 
 	private String name;
 	private String pass;
 	private UserService userService;
-	private String errorMessage;
+//	private String errorMessage;
 //	private List<User> users = new ArrayList<User>();
 	private List<Content> contents = new ArrayList<Content>();
 	/**
@@ -30,9 +30,27 @@ public class LoginAction extends ActionSupport{
 	public String execute() throws Exception {
 		List<User> list = (List<User>)userService.getHibernateTemplate().find("from User u where u.name=?", name);
 		if (list == null || list.size() == 0) {
-			errorMessage = "没有这个用户";
+			setErrorMessage("没有这个用户");
 			return "fail";
 		}
+		if (!checkPass(list.get(0).getPass())) {
+			setErrorMessage("密码错误");
+			return "fail";
+		}
+		prepareRecords(list);
+		ActionContext.getContext().getSession().put("userName", name);
+		return "success";
+	}
+	
+	private boolean checkPass(String realPass) {
+		if (!pass.equals(realPass)) {
+			return false;
+		}
+		return true;
+	}
+
+	private void prepareRecords(List<User> list) {
+
 		Set<Content> all = null;
 		for (User user: list) {
 			all = user.getContents();
@@ -42,8 +60,6 @@ public class LoginAction extends ActionSupport{
 				}
 			}
 		}
-		ActionContext.getContext().getSession().put("userName", name);
-		return "loginSuccess";
 	}
 	
 	private boolean isSameDay(Date date, String comment) {
@@ -71,7 +87,8 @@ public class LoginAction extends ActionSupport{
 		System.out.println("name is: " + name);
 		List<User> list = (List<User>)userService.getHibernateTemplate().find("from User u where u.name=?", name);
 		if (list == null || list.size() == 0) {
-			errorMessage = "没有这个用户";
+			String errorMessage = "没有这个用户";
+			setErrorMessage(errorMessage);
 			addFieldError("errorMessage", errorMessage);
 		}
 	}
@@ -102,13 +119,13 @@ public class LoginAction extends ActionSupport{
 		this.userService = userService;
 	}
 
-	public String getErrorMessage() {
-		return errorMessage;
-	}
-
-	public void setErrorMessage(String errorMessage) {
-		this.errorMessage = errorMessage;
-	}
+//	public String getErrorMessage() {
+//		return errorMessage;
+//	}
+//
+//	public void setErrorMessage(String errorMessage) {
+//		this.errorMessage = errorMessage;
+//	}
 
 
 

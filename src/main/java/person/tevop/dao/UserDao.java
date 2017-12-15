@@ -7,7 +7,7 @@ import person.tevop.model.User;
 public interface UserDao {
 	public boolean save(Object obj) throws Exception;
 
-	public boolean exists(User user);
+	public boolean exists(String userName);
 	
 	public User getUser(String name);
 	public HibernateTemplate getHibernateTemplate();

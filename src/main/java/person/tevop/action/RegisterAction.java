@@ -7,7 +7,7 @@ import com.opensymphony.xwork2.ActionSupport;
 import person.tevop.model.User;
 import person.tevop.service.UserService;
 
-public class RegisterAction extends ActionSupport{
+public class RegisterAction extends MyAction{
 
 	private String name;
 	private String pass;
@@ -28,10 +28,10 @@ public class RegisterAction extends ActionSupport{
 		user.setPass(pass);
 		if (userSrevice.save(user))
 		{
-			getActionMessages();
 			return "registerSuccess";
 		}
-		return "registerFail";
+		setErrorMessage("注册用户失败");
+		return "ail";
 	}
 
 	public String getName() {
@@ -73,10 +73,9 @@ public class RegisterAction extends ActionSupport{
 			addFieldError("errorMessage", "密码必须相同");
 			return; 
 		}
+		if (userSrevice.exists(name)) {
+			addFieldError("errorMessage", "此用户已经存在");
+			return; 
+		}
 	}
-	
-	
-	
-	
-	
 }

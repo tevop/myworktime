@@ -31,8 +31,8 @@ public class UserDaoForSql implements UserDao{
 	}
 
 	@Override
-	public boolean exists(User user) {
-		List list = hibernateTemplate.find("from User u where u.name=?", new String[] {user.getName()});
+	public boolean exists(String userName) {
+		List list = hibernateTemplate.find("from User u where u.name=?", userName);
 		if (list != null && list.size() > 0) {
 			return true;
 		}

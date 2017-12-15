@@ -11,18 +11,21 @@
 	<h1>add success</h1>
 	<%=session.getAttribute("userName")%>
 	<%-- List<UserEntity>遍历如下：--%>
+	<s:property value="contents.get(0).getDate()" />
 	<table width="242" height="256" border="1" cellpadding="1"
 		cellspacing="1">
-		<s:iterator value="users" var="user" status="u">
-			<s:iterator value="#user.contents" var="content" status="c">
+			<s:iterator value="contents" var="content" status="c">
 				<tr>
-					<td><s:property value="#user.name" /></td>
 					<td><s:property value="cost" /></td>
 					<td><s:property value="comment" /></td>
 					<td><s:property value="date" /></td>
 				</tr>
 			</s:iterator>
-		</s:iterator>
 	</table>
 </body>
+ <form method="post" action="add">
+		时	间（小时）：<input type="text" name="cost"><br>
+		内		     容：<input type="text" name="comment"><br>
+		<input type="submit" value="提交">
+	</form>
 </html>
